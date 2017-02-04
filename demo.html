@@ -4,8 +4,11 @@
 </head>
 <body>
   <h3>Demo page of the JSONExplorerWidget</h3>
+  <i>Edit the source to explore a new JSON object</i>
   <div id="vueApp">
-    <jsonexplorer></jsonexplorer>
+    <jsonexplorer v-on:new-item-selected="updateResult" :object="JSONobject" ></jsonexplorer>
+    <h4>Result:</h4>
+    {{ result }}
   </div>
 
   <script src="JSONExplorerWidget.js"></script>
