@@ -1,32 +1,16 @@
 Vue.component("jsonexplorer", {
+  props:['object'],
+
   data: function () {
     return {
-      selected: ""
+      selected: Object.keys(this.object)[0]
     };
   },
 
-  props:['object'],
-
-  render: function (createElement) {
-    var self = this;
-    let options = [];
-    //Get the key for each value in the object
-    for (var key in this.object) {
-      options.push(createElement("option", key));
-    }
-
-    return createElement("select", {
-      on: {
-        change: function (event) {
-          self.selected = event.target.value;
-        }
-      }
-    },
-    options);
-  },
+  template:"<select v-model='selected'><option v-for='(value, key) in object'>{{ key }}</option></select>",
 
   created: function () {
-    this.selected = Object.keys(this.object)[0];
+    this.$emit("new-item-selected", this.object[this.selected]);
   },
 
   watch: {
